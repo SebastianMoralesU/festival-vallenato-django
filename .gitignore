@@ -1,0 +1,5 @@
+env_festival/
+__pycache__/
+*.pyc
+.vscode/
+db.sqlite3
