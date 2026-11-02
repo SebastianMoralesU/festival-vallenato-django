@@ -28,38 +28,36 @@ def index(request):
 
 def registro(request):
 
-            if request.method == 'POST':
+    if request.method == 'POST':
 
-                correo = request.POST['correo']
+        correo = request.POST.get('correo')
 
-            if Usuario.objects.filter(correo=correo).exists():
-
-                    return render(
-                        request,
-                        'registro.html',
-                        {
-                            'formulario': UsuarioForm(),
-                            'mensaje': 'El correo ya se encuentra registrado'
-                        }
-                    )
-
-            formulario = UsuarioForm(request.POST)
-
-            if formulario.is_valid():
-
-                    formulario.save()
-
-                    return redirect('login')
-
-            formulario = UsuarioForm()
-
+        if Usuario.objects.filter(correo=correo).exists():
             return render(
                 request,
                 'registro.html',
                 {
-                    'formulario': formulario
+                    'formulario': UsuarioForm(),
+                    'mensaje': 'El correo ya se encuentra registrado'
                 }
             )
+
+        formulario = UsuarioForm(request.POST)
+
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('login')
+
+    else:
+        formulario = UsuarioForm()
+
+    return render(
+        request,
+        'registro.html',
+        {
+            'formulario': formulario
+        }
+    )
 
 def login(request):
 
