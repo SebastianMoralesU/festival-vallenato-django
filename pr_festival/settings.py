@@ -84,7 +84,9 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'festival-vallenato-django.onrender.com'
+]
 
 
 # Password validation
